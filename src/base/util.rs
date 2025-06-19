@@ -1,13 +1,12 @@
-use httparse::{Request, EMPTY_HEADER};
+use super::{Invalid, Result, UriError};
+use httparse::{EMPTY_HEADER, Request};
 use log::debug;
 use std::{
     io::Read,
     net::{IpAddr, SocketAddr, TcpStream},
     str::FromStr,
-    thread::{spawn, JoinHandle},
+    thread::{JoinHandle, spawn},
 };
-
-use super::{Invalid, Result, UriError};
 
 /// Verify the potential client by checking if the User-Agent's product is `curl` and a few other practicalities
 pub fn verify_stream(mut stream: &TcpStream, uri_path: &str) -> Result<SocketAddr> {

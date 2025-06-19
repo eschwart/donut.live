@@ -1,8 +1,7 @@
-use image::{imageops::FilterType, DynamicImage};
+use super::{GifError, Result};
+use image::{DynamicImage, imageops::FilterType};
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
-
-use super::{GifError, Result};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct AsciiFrame {

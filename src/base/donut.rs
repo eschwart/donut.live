@@ -1,7 +1,6 @@
+use super::{AsciiFrame, style};
 use indicatif::ProgressBar;
 use std::{f32::consts::TAU, time::Duration};
-
-use super::{style, AsciiFrame};
 
 /// The delay between each frame
 /// - 20.833333ms => ~48 FPS

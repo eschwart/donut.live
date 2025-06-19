@@ -1,8 +1,7 @@
+use super::Result;
 use chrono::Utc;
 use log::debug;
 use std::{fs::File, io::Write, net::SocketAddr};
-
-use super::Result;
 
 pub fn init_log_file() {
     _ = File::create_new("log")

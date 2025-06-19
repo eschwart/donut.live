@@ -1,13 +1,14 @@
+use super::{AsciiFrame, Config, Error, GifError, Result, donut, style};
 use artem::ConfigBuilder;
 use bincode::{deserialize_from, serialize};
 use gif::DecodeOptions;
-use image::{codecs::gif::GifDecoder, AnimationDecoder, ImageDecoder};
+use image::{AnimationDecoder, ImageDecoder, codecs::gif::GifDecoder};
 use indicatif::{MultiProgress, ParallelProgressIterator, ProgressIterator};
 use log::trace;
 use parking_lot::RwLock;
 use rayon::iter::{IntoParallelRefMutIterator, ParallelIterator};
 use std::{
-    fs::{read, File},
+    fs::{File, read},
     io::{BufReader, Read, Seek, SeekFrom, Write},
     iter::repeat,
     path::Path,
@@ -16,8 +17,6 @@ use std::{
     time::Duration,
 };
 use zstd::{decode_all, zstd_safe::max_c_level};
-
-use super::{donut, style, AsciiFrame, Config, Error, GifError, Result};
 
 fn get_frames_count(mut opt: DecodeOptions, input: &mut BufReader<File>) -> Result<u64> {
     // adjust configuration
