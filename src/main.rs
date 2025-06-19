@@ -1,13 +1,15 @@
 mod base;
 
+use base::*;
 use log::trace;
 use std::net::TcpListener;
 
-use base::*;
-
 fn main() -> Result {
+    // init logger
+    env_logger::init();
+
     // parse program arguments
-    let cfg = Config::new()?;
+    let cfg = Config::new();
 
     // create log file if it does not already exist
     #[cfg(feature = "logger")]
