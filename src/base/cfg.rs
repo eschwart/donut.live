@@ -1,3 +1,4 @@
+use super::Result;
 use clap::Parser;
 use log::Level;
 use std::{
@@ -7,8 +8,6 @@ use std::{
     path::{Path, PathBuf},
     str::FromStr,
 };
-
-use super::Result;
 
 /// Parse the provided path, ensuring it has a root.
 fn parse_path(s: &str) -> Result<String> {
@@ -84,20 +83,23 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new() -> Result<Self> {
+    pub fn new() -> Self {
         // ensure valid log level (default: 'trace')
-        let log_level = Level::from_str(&var("RUST_LOG").unwrap_or_else(|_| "trace".to_string()))?;
+        let log_level = Level::from_str(&var("RUST_LOG").unwrap_or_else(|_| "trace".to_string()))
+            .expect("Invalid RUST_LOG value.");
 
         // have 'clap' parse the program arguments
         let init = InitConfig::parse();
 
-        // ensure intended log level
-        set_var("RUST_LOG", format!("{},artem=warn", log_level));
+        unsafe {
+            // ensure intended log level
+            set_var("RUST_LOG", format!("{},artem=warn", log_level));
 
-        // set color specifiers
-        if init.force_colored {
-            set_var("COLORTERM", "truecolor");
-            set_var("CLICOLOR_FORCE", "1");
+            // set color specifiers
+            if init.force_colored {
+                set_var("COLORTERM", "truecolor");
+                set_var("CLICOLOR_FORCE", "1");
+            }
         }
 
         // the new file stem of the ascii-generated file
@@ -121,11 +123,7 @@ impl Config {
             }
             s
         };
-
-        // init logger
-        env_logger::init();
-
-        Ok(Self { init, file_name })
+        Self { init, file_name }
     }
 
     pub fn file_name(&self) -> &str {

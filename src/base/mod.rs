@@ -13,10 +13,11 @@ pub use cfg::*;
 pub use client::*;
 pub use err::*;
 pub use frame::*;
-use onebuck::{Bucket, ValueIndex};
 pub use progress::*;
 pub use sync::*;
 pub use util::*;
+
+use onebuck::{Bucket, ValueIndex};
 
 #[cfg(feature = "logger")]
 mod logger;
@@ -27,7 +28,7 @@ pub use logger::*;
 use std::{
     io::Write,
     net::TcpListener,
-    thread::{sleep, JoinHandle},
+    thread::{JoinHandle, sleep},
 };
 
 /// The initial HTTP response headers appended with the `ESC[2J` erase function
@@ -121,7 +122,7 @@ pub fn _dist_handler(
             }
         }
         // determinant for whether there have been any disconnections
-        g.len() > 0
+        !g.is_empty()
     };
 
     // notify `disconnected` due to a disconnection
