@@ -9,7 +9,7 @@ pub struct SignalLock<T> {
 
 impl<T> SignalLock<T> {
     /// Acquires the mutex for the boolean predicate
-    pub fn lock(&self) -> MutexGuard<bool> {
+    pub fn lock(&'_ self) -> MutexGuard<'_, bool> {
         self.inner.1.lock()
     }
 
