@@ -85,8 +85,12 @@ pub struct Config {
 impl Config {
     pub fn new() -> Self {
         // ensure valid log level (default: 'trace')
-        let log_level = Level::from_str(&var("RUST_LOG").unwrap_or_else(|_| "trace".to_string()))
-            .expect("Invalid RUST_LOG value.");
+        let log_level = Level::from_str(
+            &var("RUST_LOG")
+                .map(|s| s.trim().to_string())
+                .unwrap_or_else(|_| "trace".to_string()),
+        )
+        .expect("Invalid RUST_LOG value.");
 
         // have 'clap' parse the program arguments
         let init = InitConfig::parse();
