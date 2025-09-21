@@ -36,10 +36,10 @@ Options:
 - `shrek.rustychads.com`
 
 ## Todo
-+ Improve [trim_frames](https://github.com/splurf/donut.live/blob/44165a131ca8e5f2eb8917dce019a0e39a4d0ecc/src/base/donut.rs#L96) by removing **all** possible redundant ASCII-whitespace from every frame.
++ Improve [trim_frames](https://github.com/eschwart/donut.live/blob/44165a131ca8e5f2eb8917dce019a0e39a4d0ecc/src/base/donut.rs#L94) by removing **all** possible redundant ASCII-whitespace from every frame.
 
 ## Notes
 + This works for terminals that support [ANSI Escape Sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 ## Credit
-+ The [gen_frame](https://github.com/splurf/donut.live/blob/44165a131ca8e5f2eb8917dce019a0e39a4d0ecc/src/base/donut.rs#L15) function within `util.rs` heavily references the original [donut.c](https://www.a1k0n.net/2011/07/20/donut-math.html) script.
++ The [gen_frame](https://github.com/eschwart/donut.live/blob/44165a131ca8e5f2eb8917dce019a0e39a4d0ecc/src/base/donut.rs#L13) function within `util.rs` heavily references the original [donut.c](https://www.a1k0n.net/2011/07/20/donut-math.html) script.
