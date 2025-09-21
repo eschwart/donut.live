@@ -35,10 +35,10 @@ fn get_frames_count(mut opt: DecodeOptions, input: &mut BufReader<File>) -> Resu
     });
 
     // ensure there are no issues
-    if let Err(e) = result {
-        if !matches!(e, Error::Gif(GifError::Eof)) {
-            return Err(e);
-        }
+    if let Err(e) = result
+        && !matches!(e, Error::Gif(GifError::Eof))
+    {
+        return Err(e);
     }
     Ok(count)
 }
